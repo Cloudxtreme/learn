@@ -79,6 +79,7 @@
             <configuration>
               <outputDirectory>deployments</outputDirectory>
               <warName>ROOT</warName>
+              <webXml>${project.basedir}/src/main/webapp/WEB-INF/pweb.xml</webXml>
             </configuration>
           </plugin>
         </plugins>
