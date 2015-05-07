@@ -90,7 +90,6 @@
             <configuration>
               <outputDirectory>deployments</outputDirectory>
               <warName>ROOT</warName>
-              <webXml>${project.basedir}/src/main/webapp/WEB-INF/production_web.xml</webXml>
             </configuration>
           </plugin>
         </plugins>
