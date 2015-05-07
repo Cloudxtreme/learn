@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<body>
+ <nav>
+ 	<ul>
+ 		<li><a href='/LogIn'>Log in.</a></li>
+ 		<li><a href='/SignUp'>Sign up.</a></li>
+ 	</ul>
+ </nav>
+ <main>
+  <header>
+   <h1>List of available exams.</h1>
+  </header>
+ 	<section>
+	  <#list exams as exam>
+	  	<article>
+	  		<header>
+	  			<h2>${exam.title}</h2>
+	  		</header>
+	  		<form action='/TakeAssessment' method='POST'>
+	  			<fieldset>
+	  				<legend>Confirm assessment taking.</legend>
+	  				<input type='hidden' name='exam_id' value='${exam.id}' />
+	  				<input type='submit' name='submit' value='Take assessment.' />
+	  			</fieldset>
+	  		</form>
+	  	</article>
+	  </#list>
+ 	</section>
+	</main>
+</body>
+</html>

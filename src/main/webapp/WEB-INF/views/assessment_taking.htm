@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Assessment taking.</title>
+</head>
+<body>
+ <nav>
+  <ul>
+   <li><a href='/'>Home page.</a></li>
+  </ul>
+ </nav>
+ <main> 
+  <section>
+    <header>
+      <h1>List of tasks in the assessment.</h1>
+    </header>
+    <#list assessment.tasks as task>
+      <article id='#{task.id}'>
+       <header>
+        <h2>Task ${task.id}.</h2>
+       </header>
+       <p>${task.description}</p>
+       <form action='/Answer' method='POST'>
+        <fieldset>
+         <input type='hidden' name='task_id' value='${task.id}' />
+         <fieldset>
+          <legend>Provide your solution to the task:</legend>
+          <#if task.taskCategory == "TaskSelectionMultiple">
+           <label>
+            Select zero or more of the following options:
+            <select name='answer' multiple required>
+              <#if task.answer?has_content>
+                <#list task.options as option>
+                    <option value='${option.id}' <#list task.answer as answer><#if option.id == answer.id>selected<#break></#if></#list>>${option.content}</option>
+                </#list>
+              <#else>
+                <#list task.options as option>
+                  <option value='${option.id}' >${option.content}</option>
+                </#list>
+              </#if>
+            </select>
+           </label>
+          <#elseif task.taskCategory == "TaskSelectionSingle">
+           <label>
+            Select one of the following options:
+            <select name='answer' required>
+             <option value>I don't know.</option>
+             <#if task.answer?? >
+              <option value='${task.answer.id}' selected>${task.answer.content}</option>
+               <#list task.options as option>
+                  <#if task.answer.id != option.id>
+                    <option value='${option.id}' >${option.content}</option>
+                  </#if>
+               </#list>
+             <#else>
+               <#list task.options as option>
+                  <option value='${option.id}' >${option.content}</option>
+               </#list>
+             </#if>
+            </select>
+           </label>
+          <#elseif task.taskCategory == "TaskProvideText">
+           <label>
+            Enter text into the textfield:
+             <#if task.answer??>
+              <input type='text' name='answer' value='${task.answer}' placeholder='My answer here.' required />
+             <#else>
+              <input type='text' name='answer' value='' placeholder='My answer here.' required />
+             </#if>
+           </label>
+          <#else>
+           <label>
+            Enter text into the textarea:
+            <textarea name='answer' required><textarea>
+           </label>
+          </#if>
+         </fieldset>
+         <input type='submit' name='submit' value ='Confirm answer.' />
+        </fieldset>
+       </form>
+      </article>
+    </#list>
+  </section>
+  <form method='POST' action='/GradeAssessment'>
+    <fieldset>
+      <legend>Finish assessment taking:</legend>
+      <input type='submit' name='submit' value='End assessment.' />
+    </fieldset>
+  </form>
+ </main>
+ <section>
+  <h2>Progress in the task solving.</h2>
+  <progress max='${assessment.totalQuantityOfTasks}' value='${assessment.quantityOfTasksCompleted}'>${assessment.quantityOfTasksCompleted * 100 / assessment.totalQuantityOfTasks}%</progress>
+ </section>
+ <section>
+  <h2>Navigation between tasks in the assessment.</h2>
+  <nav>
+    <ol>
+      <#list assessment.tasks as task>
+        <li><a href='#${task.id}'>*</a></li>
+      </#list>
+    </ol>
+  </nav>
+ </section>
+</body>
+</html>
