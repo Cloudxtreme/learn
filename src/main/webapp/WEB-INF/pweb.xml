@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0"
+   xmlns="http://java.sun.com/xml/ns/javaee"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+   metadata-complete="false"
+>
+ <env-entry>
+  <env-entry-name>dbURL</env-entry-name>
+  <env-entry-value>jdbc:postgresql://localhost:5432/learn</env-entry-value>
+  <env-entry-type>java.lang.String</env-entry-type>
+ </env-entry>
+ <env-entry>
+  <env-entry-name>dbUser</env-entry-name>
+  <env-entry-value>client</env-entry-value>
+  <env-entry-type>java.lang.String</env-entry-type>
+ </env-entry>
+ <env-entry>
+  <env-entry-name>dbPassword</env-entry-name>
+  <env-entry-value>client</env-entry-value>
+  <env-entry-type>java.lang.String</env-entry-type>
+ </env-entry>
+ <display-name>Learn</display-name>
+ <servlet>
+  <servlet-name>FreeMarkerRequestHandler</servlet-name>
+  <servlet-class>freemarker.ext.servlet.FreemarkerServlet</servlet-class>
+
+  <!-- FreemarkerServlet settings: -->
+  <init-param>
+   <param-name>TemplatePath</param-name>
+   <param-value>/</param-value>
+  </init-param>
+  <init-param>
+   <param-name>NoCache</param-name>
+   <param-value>true</param-value>
+  </init-param>
+  <init-param>
+   <param-name>ContentType</param-name>
+   <param-value>text/html; charset=UTF-8</param-value> <!-- Forces UTF-8 output encoding! -->
+  </init-param>
+
+  <!-- FreeMarker settings: -->
+  <init-param>
+   <param-name>incompatible_improvements</param-name>
+   <param-value>2.3.22</param-value>
+   <!-- Recommended to set to a high value. For the details, see the Java API docs of
+     freemarker.template.Configuration#Configuration(Version). -->
+  </init-param>
+  <init-param>
+   <param-name>template_exception_handler</param-name>
+   <!-- Use "html_debug" instead during development! -->
+   <param-value>rethrow</param-value>
+  </init-param>
+  <init-param>
+   <param-name>template_update_delay</param-name>
+   <!-- ATTENTION, 0 is for development only! Use higher value otherwise. -->
+   <param-value>0</param-value>
+  </init-param>
+  <init-param>
+   <param-name>default_encoding</param-name>
+   <!-- The encoding of the template files. -->
+   <param-value>UTF-8</param-value>
+  </init-param>
+  <init-param>
+   <param-name>locale</param-name>
+   <!-- Influences number and date/time formatting, etc. -->
+   <param-value>en_US</param-value>
+  </init-param>
+  <init-param>
+   <param-name>number_format</param-name>
+   <param-value>0.##########</param-value>
+  </init-param>
+
+  <load-on-startup>1</load-on-startup>
+ </servlet>
+ <servlet-mapping>
+   <servlet-name>FreeMarkerRequestHandler</servlet-name>
+   <url-pattern>*.htm</url-pattern>
+ </servlet-mapping>
+ <servlet>
+  <servlet-name>AccountCreateRequestHandler</servlet-name>
+  <servlet-class>ch.protonmail.vladyslavbond.learn.handlers.AccountCreateRequestHandler</servlet-class>
+ </servlet>
+ <servlet>
+  <servlet-name>AssessmentCreateRequestHandler</servlet-name>
+  <servlet-class>ch.protonmail.vladyslavbond.learn.handlers.AssessmentCreateRequestHandler</servlet-class>
+ </servlet>
+ <servlet>
+  <servlet-name>AssessmentUpdateRequestHandler</servlet-name>
+  <servlet-class>ch.protonmail.vladyslavbond.learn.handlers.AssessmentUpdateRequestHandler</servlet-class>
+ </servlet>
+ <servlet>
+  <servlet-name>AssessmentDestroyRequestHandler</servlet-name>
+  <servlet-class>ch.protonmail.vladyslavbond.learn.handlers.AssessmentDestroyRequestHandler</servlet-class>
+ </servlet>
+ <servlet>
+  <servlet-name>HomePageRequestHandler</servlet-name>
+  <servlet-class>ch.protonmail.vladyslavbond.learn.handlers.HomePageRequestHandler</servlet-class>
+ </servlet>
+ <servlet>
+  <servlet-name>LogInRequestHandler</servlet-name>
+  <servlet-class>ch.protonmail.vladyslavbond.learn.handlers.LogInRequestHandler</servlet-class>
+ </servlet>
+ <servlet>
+  <servlet-name>TerminateSessionRequestHandler</servlet-name>
+  <servlet-class>ch.protonmail.vladyslavbond.learn.handlers.TerminateSessionRequestHandler</servlet-class>
+ </servlet>
+ <servlet-mapping>
+  <servlet-name>AccountCreateRequestHandler</servlet-name>
+  <url-pattern>/SignUp</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>AssessmentCreateRequestHandler</servlet-name>
+  <url-pattern>/TakeAssessment</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>AssessmentUpdateRequestHandler</servlet-name>
+  <url-pattern>/Answer</url-pattern>
+  <url-pattern>/TakeAssessment/*</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>AssessmentDestroyRequestHandler</servlet-name>
+  <url-pattern>/GradeAssessment</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>LogInRequestHandler</servlet-name>
+  <url-pattern>/LogIn</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>TerminateSessionRequestHandler</servlet-name>
+  <url-pattern>/TerminateSession</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>HomePageRequestHandler</servlet-name>
+  <url-pattern></url-pattern>
+ </servlet-mapping>
+ <security-constraint>
+   <web-resource-collection>
+    <web-resource-name>FreeMarker MVC Views</web-resource-name>
+    <url-pattern>*.htm</url-pattern>
+   </web-resource-collection>
+   <auth-constraint>
+   </auth-constraint>
+ </security-constraint> 
+</web-app>
+
