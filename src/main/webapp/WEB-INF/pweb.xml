@@ -7,17 +7,17 @@
 >
  <env-entry>
   <env-entry-name>dbURL</env-entry-name>
-  <env-entry-value>jdbc:postgresql://localhost:5432/learn</env-entry-value>
+  <env-entry-value>jdbc:postgresql://127.6.46.2:5432/interactive</env-entry-value>
   <env-entry-type>java.lang.String</env-entry-type>
  </env-entry>
  <env-entry>
   <env-entry-name>dbUser</env-entry-name>
-  <env-entry-value>client</env-entry-value>
+  <env-entry-value>clientr5q8uxc6fz</env-entry-value>
   <env-entry-type>java.lang.String</env-entry-type>
  </env-entry>
  <env-entry>
   <env-entry-name>dbPassword</env-entry-name>
-  <env-entry-value>client</env-entry-value>
+  <env-entry-value>BKtc9k%P5%^dchcxvH!ruNhf@82pVcqH35SZ^UgQvjnecTB7fDUHqDdSeq&rkT@SgmDDZkJ@6vub9KW2Y7RuSaHS6AZ^FX8PGV#k</env-entry-value>
   <env-entry-type>java.lang.String</env-entry-type>
  </env-entry>
  <display-name>Learn</display-name>
