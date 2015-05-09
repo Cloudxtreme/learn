@@ -71,7 +71,7 @@
      <!-- http://maven.apache.org/guides/mini/guide-building-for-different-environments.html -->
      <id>openshift</id>
      <build>
-        <finalName>learn</finalName>
+        <finalName>interactive</finalName>
         <plugins>
           <plugin>
             <artifactId>maven-war-plugin</artifactId>
@@ -79,7 +79,6 @@
             <configuration>
               <outputDirectory>deployments</outputDirectory>
               <warName>ROOT</warName>
-              <webXml>${project.basedir}/src/main/webapp/WEB-INF/pweb.xml</webXml>
             </configuration>
           </plugin>
         </plugins>
@@ -96,9 +95,6 @@
           <plugin>
               <groupId>org.apache.maven.plugins</groupId>
               <artifactId>maven-war-plugin</artifactId>
-              <configuration>
-                  <webXml>${project.basedir}/src/main/webapp/WEB-INF/web.xml</webXml>
-              </configuration>
           </plugin>
           <plugin>
             <groupId>org.jboss.as.plugins</groupId>
